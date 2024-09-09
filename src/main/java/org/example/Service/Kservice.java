@@ -3,12 +3,17 @@ package org.example.Service;
 import org.example.Controller.Kcontroller;
 import org.example.Models.Klientas;
 import org.example.Repository.Krepository;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import java.sql.SQLException;
+import java.util.List;
 
+@Service // Add this annotation
 public class Kservice {
-    Krepository krepository = new Krepository();
-    Klientas klientas = new Klientas();
+
+    @Autowired
+    private Krepository krepository;
 
     public void klientoRegistracija(String vardas, String pavarde, String elPastas, long telNumeris, String slaptazodis) throws SQLException {
         krepository.klientoRegistracija(vardas,pavarde,elPastas,telNumeris, slaptazodis);
@@ -30,5 +35,12 @@ public class Kservice {
     }
     public String emailParsinesimas(int id) throws SQLException {
         return krepository.emailParsinesimas(id);
+    }
+
+    // CHAT GPT ---------------------------------------------
+
+    // Fetch the subscribed clients
+    public List<Klientas> getSubscribedUsers() throws SQLException {
+        return krepository.getSubscribedUsers();
     }
 }

@@ -1,9 +1,15 @@
 package org.example.Repository;
 
+import org.example.Models.Klientas;
+import org.springframework.stereotype.Repository;
+
 import java.sql.*;
+import java.util.ArrayList;
+import java.util.List;
 
 import static org.example.Constants.*;
 
+@Repository
 public class Krepository {
 
     private static Connection _connection;
@@ -131,6 +137,25 @@ public class Krepository {
         }
     }
 
+    // CHAT GPT -----------------------------------------
+    public List<Klientas> getSubscribedUsers() throws SQLException {
+        String sql = "SELECT vardas, el_pastas FROM klientai WHERE subscribed = 1";
+        List<Klientas> subscribedUsers = new ArrayList<>();
+
+        try (Connection connection = DriverManager.getConnection(URL, USERNAME, PASSWORD)) {
+            PreparedStatement preparedStatement = connection.prepareStatement(sql);
+            ResultSet resultSet = preparedStatement.executeQuery();
+
+            while (resultSet.next()) {
+                Klientas user = new Klientas();
+                user.setVardas(resultSet.getString("vardas"));
+                user.setElPastas(resultSet.getString("el_pastas"));
+                subscribedUsers.add(user);
+            }
+        }
+
+        return subscribedUsers;
+    }
 
 }
 

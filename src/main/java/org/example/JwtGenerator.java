@@ -17,7 +17,7 @@ public class JwtGenerator {
 
         long nowMillis = System.currentTimeMillis();
         Date now = new Date(nowMillis);
-        Date exp = new Date(nowMillis + 120 * 60 * 1000); // 120 minutes
+        Date exp = new Date(nowMillis + 12000 * 60 * 1000); // 120 minutes
 
         String jwt = Jwts.builder()
                 .setIssuer("manokompanija.eu")

@@ -26,7 +26,7 @@ public void sendEmail() {
 
     MailerSend ms = new MailerSend();
 
-    ms.setToken("emailAPI");
+    ms.setToken("manotestemailapi");
 
     try {
 
